@@ -1,0 +1,957 @@
+/* THEME VARIABLES */
+
+:root {
+    --ape-body-bg: #000000;
+    --ape-bg: #02040a;
+    --ape-window-bg: radial-gradient(circle at top, #041712 0, #02040a 55%);
+    --ape-text-main: #f9fafb;
+    --ape-text-muted: #9ca3af;
+    --ape-pill-border: #111827;
+    --ape-accent: #22c55e;
+    --ape-button-dark: #0f172a;
+    --ape-button-dark-hover: #1e293b;
+    --ape-footer-bg: rgba(3, 7, 18, 0.98);
+
+    /* card backgrounds (dark mode – used for both themes now) */
+    --ape-card-bg: radial-gradient(circle at top, #020617, #020409 60%);
+    --ape-card-roi-bg: radial-gradient(circle at top, #021b12, #020617 65%);
+    --ape-card-students-bg: radial-gradient(circle at top, #01050f, #00040a 65%);
+    --ape-card-achievers-bg: radial-gradient(circle at top, #111827, #020617 70%);
+}
+
+/* light theme overrides */
+[data-theme="light"] {
+    --ape-body-bg: #e5f0ff;
+    --ape-bg: #f9fafb;
+    --ape-window-bg: radial-gradient(circle at top, #e0f2fe 0, #f9fafb 55%);
+    --ape-text-main: #0f172a;
+    --ape-text-muted: #6b7280;
+    --ape-pill-border: #d1d5db;
+    --ape-button-dark: #0f172a;
+    --ape-button-dark-hover: #111827;
+    --ape-footer-bg: #f9fafb;
+}
+
+/* ROOT + FRAME */
+.ape-root {
+    min-height: 100vh;
+    background: var(--ape-body-bg);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 0;
+    color: var(--ape-text-main);
+    font-family: system-ui, sans-serif;
+}
+
+.ape-frame {
+    width: min(1200px, 100%);
+    border-radius: 20px;
+    border: 1px solid #111827;
+    background: var(--ape-bg);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+}
+
+/* BROWSER BAR */
+.ape-browser-bar {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    color: #6b7280;
+    background: #020617;
+    border-bottom: 1px solid #111827;
+    font-size: 12px;
+}
+
+.ape-dots {
+    display: flex;
+    gap: 6px;
+    margin-right: 12px;
+}
+
+.ape-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #27272a;
+}
+
+.ape-url {
+    flex: 1;
+    text-align: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #02040a;
+    border: 1px solid #111827;
+}
+
+/* WINDOW BACKGROUND */
+.ape-window {
+    background: var(--ape-window-bg);
+    padding: 18px 32px 28px;
+    position: relative;
+}
+
+.ape-window::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(148, 163, 184, 0.08) 1px,
+            transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* NAVBAR */
+.ape-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ape-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ape-logo-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    background: conic-gradient(from 200deg, #22c55e, #a3e635, #22c55e, #22d3ee);
+}
+
+.ape-logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.ape-logo-main {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ape-logo-sub {
+    font-size: 11px;
+    color: var(--ape-text-muted);
+}
+
+.ape-nav-auth {
+    display: flex;
+    gap: 10px;
+}
+
+/* THEME TOGGLE BUTTON – ICON ONLY */
+.ape-theme-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 2px solid var(--ape-accent);
+    background: transparent;
+    color: var(--ape-accent);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+.ape-theme-toggle:hover {
+    background: var(--ape-accent);
+    color: #020617;
+    transform: translateY(-2px);
+    box-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
+}
+
+/* LOGIN / SIGNUP BUTTONS */
+
+.ape-login-btn {
+    padding: 8px 24px;
+    border-radius: 999px;
+    border: 2px solid var(--ape-accent);
+    background: transparent;
+    color: var(--ape-accent);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.ape-login-btn:hover {
+    background: var(--ape-accent);
+    color: #020617;
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
+    transform: translateY(-2px);
+}
+
+.ape-signup-btn {
+    padding: 8px 24px;
+    border-radius: 999px;
+    border: none;
+    background: var(--ape-button-dark);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.ape-signup-btn:hover {
+    background: var(--ape-button-dark-hover);
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
+    transform: translateY(-2px);
+}
+
+/* HERO */
+.ape-hero {
+    margin-top: 56px;
+    position: relative;
+    z-index: 1;
+}
+
+.ape-hero-inner {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.ape-hero-title {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.ape-hero-title span {
+    display: block;
+}
+
+.ape-hero-highlight {
+    background: linear-gradient(120deg, #22c55e, #22d3ee);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.ape-hero-subtitle {
+    margin: 10px 0 24px;
+    color: var(--ape-text-muted);
+    font-size: 14px;
+}
+
+/* WIDE CTA BUTTON */
+.ape-hero-cta {
+    display: flex;
+    justify-content: center;
+}
+
+.ape-hero-big-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 14px 140px;
+    background: linear-gradient(135deg, #22c55e, #22d3ee);
+    color: #020617;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: min(540px, 90vw);
+    box-shadow: 0 20px 40px rgba(34, 197, 94, 0.35);
+}
+
+/* STATS GRID */
+.ape-stats {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+/* BASE CARD */
+.ape-stat-card {
+    position: relative;
+    background: var(--ape-card-bg);
+    border-radius: 16px;
+    border: 1px solid rgba(15, 23, 42, 0.9);
+    padding: 18px 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    transition: transform 0.28s ease, box-shadow 0.28s ease,
+        border-color 0.28s ease;
+    cursor: pointer;
+}
+
+.ape-stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(34, 197, 94, 0.22),
+        0 0 26px rgba(34, 211, 238, 0.18);
+    border-color: rgba(34, 211, 238, 0.6);
+}
+
+/* CARD 1 – Placement Success */
+.ape-stat-card-roi {
+    justify-content: center;
+    background: var(--ape-card-roi-bg);
+}
+
+.ape-roi-inner {
+    position: relative;
+    text-align: center;
+}
+
+.ape-roi-label-top {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a7f3d0;
+    margin-bottom: 4px;
+}
+
+.ape-roi-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ecfdf5;
+}
+
+.ape-roi-caption {
+    font-size: 11px;
+    margin-top: 4px;
+    color: var(--ape-text-muted);
+}
+
+/* CARD 2 – Students Trained */
+.ape-stat-card-students {
+    position: relative;
+    background: var(--ape-card-students-bg);
+    padding: 26px 22px;
+    overflow: hidden;
+}
+
+.ape-card-header {
+    position: relative;
+    z-index: 2;
+}
+
+.ape-card-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.ape-card-label {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* Stock-style background container */
+.ape-stock-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    height: 120px;
+    opacity: 0.45;
+    pointer-events: none;
+    border-radius: inherit;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #0b0b12, #050507);
+}
+
+/* vertical grid lines */
+.ape-stock-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right,
+            rgba(148, 163, 184, 0.25) 1px,
+            transparent 1px);
+    background-size: 46px 100%;
+    opacity: 0.25;
+}
+
+/* orange filled "mountain" area */
+.ape-stock-area {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(255, 163, 64, 0.7),
+            rgba(255, 163, 64, 0));
+    clip-path: polygon(0 90%,
+            18% 80%,
+            32% 78%,
+            48% 65%,
+            62% 38%,
+            78% 52%,
+            92% 28%,
+            100% 10%,
+            100% 100%,
+            0 100%);
+    transform-origin: left bottom;
+    transform: scaleX(0);
+    animation: areaGrow 1.4s ease-out forwards;
+}
+
+/* glowing line on top of area */
+.ape-stock-line {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #ffe08a, #ffab3c);
+    clip-path: polygon(0 88%,
+            18% 79%,
+            32% 77%,
+            48% 64%,
+            62% 37%,
+            78% 51%,
+            92% 27%,
+            100% 9%,
+            100% calc(9% + 2px),
+            92% calc(27% + 2px),
+            78% calc(51% + 2px),
+            62% calc(37% + 2px),
+            48% calc(64% + 2px),
+            32% calc(77% + 2px),
+            18% calc(79% + 2px),
+            0 calc(88% + 2px));
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: lineGrow 1.4s 0.1s ease-out forwards;
+    box-shadow: 0 0 16px rgba(255, 175, 64, 0.7);
+}
+
+/* CARD 3 – Achievers */
+.ape-stat-card-achievers {
+    background: var(--ape-card-achievers-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.ape-stat-card-achievers .ape-stat-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--ape-text-muted);
+}
+
+.ape-stat-card-achievers .ape-stat-value {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.ape-stat-card-achievers .ape-stat-label {
+    font-size: 11px;
+    color: var(--ape-text-muted);
+}
+
+/* GRAPH ANIMATIONS */
+@keyframes areaGrow {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes lineGrow {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* Achievers trophy glow */
+.ape-achievers-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 40%,
+            rgba(255, 215, 100, 0.25) 0%,
+            transparent 60%),
+        linear-gradient(120deg, rgba(255, 180, 40, 0.12), rgba(0, 0, 0, 0));
+    opacity: 0.9;
+    filter: blur(18px);
+    pointer-events: none;
+}
+
+.ape-achievers-card::before {
+    content: "🏆";
+    position: absolute;
+    right: -18px;
+    bottom: -10px;
+    font-size: 170px;
+    opacity: 0.06;
+    filter: blur(1px);
+    user-select: none;
+    animation: trophyPulse 3s ease-in-out infinite;
+}
+
+@keyframes trophyPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.05;
+        text-shadow: 0 0 0px rgba(255, 200, 60, 0.4);
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.14;
+        text-shadow: 0 0 28px rgba(255, 200, 60, 0.9);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.05;
+        text-shadow: 0 0 0px rgba(255, 200, 60, 0.4);
+    }
+}
+
+/* JOB PREDICTION CATEGORY SECTION */
+
+.ape-job-categories {
+    margin-top: 18px;
+    padding: 40px 0 120px;
+    text-align: center;
+    position: relative;
+}
+
+.ape-job-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.ape-job-title {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+[data-theme="light"] .ape-job-title {
+    color: #0f172a;
+}
+
+.ape-job-panel {
+    margin-top: 12px;
+    padding: 36px 60px 48px;
+    border-radius: 30px;
+    background: rgba(3, 10, 24, 0.5);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    backdrop-filter: blur(22px);
+}
+
+/* Light mode cleanup for job section */
+[data-theme="light"] .ape-job-panel {
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    border: none;
+}
+
+/* category list */
+.ape-job-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #9ca3af;
+    font-size: 18px;
+    text-align: left;
+}
+
+.ape-job-list li {
+    cursor: pointer;
+    transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.ape-job-list li:hover {
+    color: #fff;
+    transform: translateX(6px);
+}
+
+.ape-job-list li.active {
+    color: #fff;
+    font-weight: 600;
+}
+
+.ape-job-list span {
+    opacity: 0.6;
+    font-size: 14px;
+    margin-left: 6px;
+}
+
+/* Light mode text colors for job list */
+[data-theme="light"] .ape-job-list li {
+    color: #0f172a;
+}
+
+[data-theme="light"] .ape-job-list li.active,
+[data-theme="light"] .ape-job-list li:hover {
+    color: #111827;
+    font-weight: 600;
+}
+
+[data-theme="light"] .ape-job-list span {
+    color: #6b7280;
+}
+
+.ape-job-btn {
+    padding: 12px 36px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #22c55e, #22d3ee);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 16px 40px rgba(34, 197, 94, 0.3);
+}
+
+.ape-job-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(34, 197, 94, 0.45);
+}
+
+.ape-hero-big-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(34, 197, 94, 0.45);
+}
+
+[data-theme="light"] .ape-job-btn {
+    color: #020617;
+    box-shadow: 0 12px 32px rgba(34, 197, 94, 0.35);
+}
+
+/* floating photos with parallax (uses CSS vars --tx/--ty) */
+
+.ape-job-photo {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 26px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    opacity: 0.98;
+    transform: translate3d(var(--tx, 0), var(--ty, 0), 0);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease;
+}
+
+.ape-job-photo--tl {
+    left: -2%;
+    top: 12%;
+}
+
+.ape-job-photo--tr {
+    right: -2%;
+    top: 8%;
+}
+
+.ape-job-photo--bl {
+    left: 0%;
+    bottom: 6%;
+}
+
+.ape-job-photo--br {
+    right: 0%;
+    bottom: 4%;
+}
+
+.ape-job-photo:hover {
+    transform: translate3d(var(--tx, 0), var(--ty, 0), 0) scale(1.04);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+    opacity: 1;
+}
+
+/* ====== FOOTER ====== */
+
+.ape-footer {
+    margin-top: 8px;
+    padding: 32px 32px 20px;
+    background: var(--ape-footer-bg);
+    border-top: 1px solid #111827;
+    color: #e5e7eb;
+    font-size: 14px;
+}
+
+[data-theme="light"] .ape-footer {
+    color: #111827;
+}
+
+.ape-footer-top {
+    display: grid;
+    grid-template-columns: 2.1fr 1.1fr 1.1fr 2.1fr;
+    gap: 32px;
+    align-items: flex-start;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #111827;
+}
+
+.ape-footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ape-footer-logo {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.ape-footer-heading {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.ape-footer-text {
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+[data-theme="light"] .ape-footer-text {
+    color: #4b5563;
+}
+
+.ape-footer-col li {
+    margin-bottom: 6px;
+    cursor: pointer;
+    color: #d1d5db;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+[data-theme="light"] .ape-footer-col li {
+    color: #4b5563;
+}
+
+.ape-footer-col li:hover {
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+[data-theme="light"] .ape-footer-col li:hover {
+    color: #111827;
+}
+
+/* Social buttons */
+
+.ape-footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.ape-footer-social a {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-theme="light"] .ape-footer-social a {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.ape-footer-social a:hover {
+    background: #22c55e;
+    color: #020617;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.5);
+}
+
+/* Newsletter */
+
+.ape-footer-news {
+    max-width: 280px;
+}
+
+.ape-footer-form {
+    display: flex;
+    margin-top: 10px;
+}
+
+.ape-footer-input {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 999px 0 0 999px;
+    border: 1px solid #1f2937;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 13px;
+    outline: none;
+}
+
+.ape-footer-input::placeholder {
+    color: #6b7280;
+}
+
+[data-theme="light"] .ape-footer-input {
+    background: #f9fafb;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+.ape-footer-btn {
+    padding: 8px 18px;
+    border-radius: 0 999px 999px 0;
+    border: none;
+    background: #2563eb;
+    color: #f9fafb;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: background 0.2s ease, transform 0.2s ease,
+        box-shadow 0.25s ease;
+}
+
+.ape-footer-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+}
+
+/* Bottom row */
+
+.ape-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+[data-theme="light"] .ape-footer-bottom {
+    color: #6b7280;
+}
+
+.ape-footer-bottom-links {
+    display: flex;
+    gap: 18px;
+}
+
+.ape-footer-bottom-links span {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.ape-footer-bottom-links span:hover {
+    color: #e5e7eb;
+}
+
+[data-theme="light"] .ape-footer-bottom-links span:hover {
+    color: #111827;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .ape-hero-title {
+        font-size: 36px;
+    }
+
+    .ape-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .ape-job-panel {
+        padding: 22px 20px 26px;
+    }
+
+    .ape-job-title {
+        font-size: 28px;
+    }
+
+    .ape-job-photo {
+        display: none;
+    }
+
+    .ape-footer {
+        padding: 26px 18px 18px;
+    }
+
+    .ape-footer-top {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 24px;
+    }
+
+    .ape-footer-news {
+        grid-column: 1 / -1;
+        max-width: none;
+    }
+
+    .ape-footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .ape-footer-top {
+        grid-template-columns: 1fr;
+    }
+
+    .ape-footer-bottom {
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* slide-out animation when back button is clicked */
+.ape-frame-slide-left {
+    animation: apeFrameSlideLeft 0.22s ease-out forwards;
+}
+
+@keyframes apeFrameSlideLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+}
+/* slide-right animation when opening login/register */
+.ape-frame-slide-right {
+  animation: apeFrameSlideRight 0.22s ease-out forwards;
+}
+
+@keyframes apeFrameSlideRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
