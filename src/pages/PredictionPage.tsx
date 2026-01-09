@@ -300,12 +300,19 @@ const PredictionPage: React.FC = () => {
                               {s.title} <span>{s.score}% match</span>
                             </div>
 
-                            <div className="missing-skills">
-                              <span>Missing skills:</span>
-                              {s.missingSkills?.map((skill, i) => (
-                                <span key={i} className="skill-chip">{skill}</span>
-                              ))}
-                            </div>
+                            {s.missingSkills && s.missingSkills.length > 0 ? (
+                              <div className="missing-skills">
+                                <span>Missing skills:</span>
+                                {s.missingSkills.map((skill, i) => (
+                                  <span key={i} className="skill-chip">{skill}</span>
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="missing-skills success">
+                                <span>✅ No missing skills</span>
+                              </div>
+                            )}
+
                           </div>
 
                         </li>
