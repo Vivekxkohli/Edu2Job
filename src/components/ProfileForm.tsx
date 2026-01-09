@@ -343,6 +343,7 @@ const ProfileForm: React.FC = () => {
             university: trimmedUni,
             cgpa: trimmedCgpa,
             year_of_completion: trimmedYear,
+            skills: skillsList,
           }),
         });
 
@@ -478,9 +479,44 @@ const ProfileForm: React.FC = () => {
 
     // Skills tab: nothing special on Save button (skills saved on add/remove)
     if (activeTab === "skills") {
-      showToast("Your skills are already saved for the dashboard.", "info");
+  if (!token) {
+    showToast("Please login again.", "error");
+    return;
+  }
+
+  try {
+    setIsSaving(true);
+
+    console.log("DEBUG: Saving skills to backend:", dashboardData.skills);
+
+    const res = await fetch(`${API_BASE}/profile/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        skills: dashboardData.skills, // ✅ THIS LINE FIXES EVERYTHING
+      }),
+    });
+
+    if (!res.ok) {
+      showToast("Failed to save skills.", "error");
       return;
     }
+
+    showToast("Skills saved successfully!", "success");
+  } catch (err) {
+    console.error(err);
+    showToast("Error saving skills.", "error");
+  } finally {
+    setIsSaving(false);
+  }
+
+  return;
+}
+
+
   };
 
   // ------- SKILLS HANDLERS -------
