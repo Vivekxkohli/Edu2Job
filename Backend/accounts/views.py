@@ -169,6 +169,12 @@ class ProfileView(APIView):
         
         print(f"DEBUG: Processing education data: {edu_data}")
 
+        skills = request.data.get("skills", None)
+
+        if skills is not None:
+            user.skills = skills
+            user.save()
+
         # Check if education exists
         education = Education.objects.filter(user=user).first()
         
@@ -283,10 +289,8 @@ class JobPredictionView(APIView):
             "college": education.university,
             "year_of_completion": education.year_of_completion,
             "cgpa": float(education.cgpa),
-            "skills": list(
-                Certification.objects.filter(user=user)
-                .values_list("cert_name", flat=True)
-            ),
+            "skills": user.skills or [],
+
             "certifications": list(
                 Certification.objects.filter(user=user)
                 .values_list("cert_name", flat=True)
