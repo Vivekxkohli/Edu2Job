@@ -41,9 +41,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Education(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="educations")
-    degree = models.CharField(max_length=50, blank=True, null=True)
-    specialization = models.CharField(max_length=100, blank=True, null=True)
-    university = models.CharField(max_length=100, blank=True, null=True)
+    degree = models.TextField(blank=True, null=True)
+    specialization = models.TextField(blank=True, null=True)
+    university = models.TextField(blank=True, null=True)
     cgpa = models.DecimalField(
         max_digits=4,
         decimal_places=2, 
@@ -76,8 +76,8 @@ class Education(models.Model):
 
 class Certification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="certifications")
-    cert_name = models.CharField(max_length=100)
-    issuing_organization = models.CharField(max_length=100)
+    cert_name = models.TextField()
+    issuing_organization = models.TextField()
     issue_date = models.DateField()
 
     def __str__(self) -> str:
