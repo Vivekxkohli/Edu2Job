@@ -33,9 +33,8 @@ type AuthContextType = {
   loginWithGoogle: (accessToken: string) => Promise<User>;
   logout: () => void;
   isLoading: boolean;
-  isLoading: boolean;
   refreshUserData: () => Promise<void>;
-  loginWithToken: (token: string) => Promise<boolean>; // ⭐ NEW: Method to login with token
+  loginWithToken: (token: string) => Promise<boolean>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -362,9 +361,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         loginWithGoogle,
         logout,
         isLoading,
-        isLoading,
         refreshUserData,
-        loginWithToken, // ⭐ Add to context value
+        loginWithToken,
       }}
     >
       {children}

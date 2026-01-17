@@ -27,7 +27,7 @@ const AuthCallbackPage: React.FC = () => {
         navigate("/login");
       }
     });
-  }, [location.search, login, navigate, showToast]);
+  }, [location.search, loginWithToken, navigate, showToast]);
 
   return (
     <div className="ape-root">
