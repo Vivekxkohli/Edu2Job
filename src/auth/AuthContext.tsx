@@ -33,7 +33,9 @@ type AuthContextType = {
   loginWithGoogle: (accessToken: string) => Promise<User>;
   logout: () => void;
   isLoading: boolean;
-  refreshUserData: () => Promise<void>; // ⭐ NEW: Function to refresh user data
+  isLoading: boolean;
+  refreshUserData: () => Promise<void>;
+  loginWithToken: (token: string) => Promise<boolean>; // ⭐ NEW: Method to login with token
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -239,6 +241,55 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // ⭐ NEW: Login with token (for AuthCallbackPage)
+  const loginWithToken = async (accessToken: string): Promise<boolean> => {
+    try {
+      setIsLoading(true);
+
+      // Temporarily set token to fetch profile
+      const res = await fetch(`${API_BASE}/profile/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const backendUser = data.user || data;
+
+        const userForContext: User = {
+          id: backendUser.id,
+          email: backendUser.email,
+          name: backendUser.name || backendUser.email.split("@")[0],
+          role: backendUser.role || "student",
+          token: accessToken,
+          provider: "google",
+          is_flagged: backendUser.is_flagged || false,
+          flag_reason: backendUser.flag_reason || "",
+        };
+
+        // Persist session
+        localStorage.setItem("token", accessToken);
+        localStorage.setItem("user", JSON.stringify(userForContext));
+        localStorage.setItem("rememberMe", "true"); // specific choice for callback
+
+        setUser(userForContext);
+        setToken(accessToken);
+        showToast("Login successful", "success");
+        return true;
+      } else {
+        showToast("Failed to verify session", "error");
+        return false;
+      }
+    } catch (error) {
+      console.error("Login with token error:", error);
+      showToast("Login failed", "error");
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // ⭐ NEW: Function to refresh user data from backend
   const refreshUserData = async (): Promise<void> => {
     try {
@@ -311,7 +362,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         loginWithGoogle,
         logout,
         isLoading,
-        refreshUserData // ⭐ Add refresh function to context
+        isLoading,
+        refreshUserData,
+        loginWithToken, // ⭐ Add to context value
       }}
     >
       {children}

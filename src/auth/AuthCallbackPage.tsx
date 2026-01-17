@@ -7,24 +7,26 @@ import { useToast } from "./ToastContext";
 const AuthCallbackPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { loginWithToken } = useAuth();
   const { showToast } = useToast();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const token = params.get("token");
-    const email = params.get("email");
-    const username = params.get("username") || undefined;
 
-    if (!token || !email) {
+    if (!token) {
       showToast("Google login failed. Please try again.", "error");
       navigate("/login");
       return;
     }
 
-    login({ email, username }, token);
-    showToast("Logged in with Google!", "success");
-    navigate("/dashboard");
+    loginWithToken(token).then((success) => {
+      if (success) {
+        navigate("/dashboard");
+      } else {
+        navigate("/login");
+      }
+    });
   }, [location.search, login, navigate, showToast]);
 
   return (

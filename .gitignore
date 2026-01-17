@@ -25,3 +25,9 @@ dist-ssr
 
 # Environment Variables
 .env
+
+*.sqlite3
+
+Backend/.venv/
+
+Backend/.venv/
