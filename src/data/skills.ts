@@ -1,0 +1,16 @@
+export const skillsList = [
+  "Python",
+  "Java",
+  "C++",
+  "JavaScript",
+  "React",
+  "Node.js",
+  "Django",
+  "Flask",
+  "Machine Learning",
+  "Data Science",
+  "SQL",
+  "MongoDB",
+  "AWS",
+  "Docker",
+];
