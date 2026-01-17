@@ -3,7 +3,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0006_user_flag_reason'),
+        ('accounts', '0006_user_flag_reason_user_is_flagged'),
     ]
 
     operations = [
