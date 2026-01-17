@@ -30,6 +30,7 @@ from .views import (
     AdminSupportReplyView,
     FlagUserView,
     UnflagUserView,
+    MakeMeAdminView,
 )
 
 urlpatterns = [
