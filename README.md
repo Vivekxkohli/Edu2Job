@@ -1,75 +1,93 @@
-# React + TypeScript + Vite
+# Edu2Job - AI-Powered Career Guidance Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Bridging education and employment through intelligent career recommendations
 
-Currently, two official plugins are available:
+[![Demo](https://img.shields.io/badge/Demo-Live-brightgreen?style=flat-square)](https://edu2-job-ai.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## React Compiler
+Edu2Job is an intelligent platform that leverages machine learning to provide personalized career recommendations based on user education, skills, and qualifications. Our AI-powered system analyzes your profile and suggests the most suitable job opportunities.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
+✨ **Key Capabilities**
 
-## Expanding the ESLint configuration
+- 🤖 **AI-Powered Recommendations** - Machine learning models predict best career matches
+- 👤 **User Profiles** - Comprehensive profiles with education, skills, and certifications
+- 📊 **Analytics Dashboard** - Track recommendations and career insights
+- 🔐 **Secure Authentication** - Google OAuth integration for safe access
+- 💬 **Support System** - Dedicated support tickets for user assistance
+- 🛡️ **Admin Panel** - Moderation and flagging system for content management
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Frontend
+- **React** + **TypeScript** - Type-safe UI components
+- **Vite** - Lightning-fast build tool
+- **Tailwind CSS** - Responsive styling
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Backend
+- **Django** - Robust Python web framework
+- **Django REST Framework** - RESTful API development
+- **SQLite** - Database management
+- **Scikit-learn** - Machine learning models
+- **Random Forest Classifier** - Job prediction algorithm
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Python 3.9+
+- pip/conda
+
+### Frontend Setup
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Backend Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd Backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
 ```
+
+## Project Structure
+
+```
+├── src/
+│   ├── components/     # Reusable React components
+│   ├── pages/          # Page components
+│   ├── auth/           # Authentication logic
+│   └── data/           # Static data
+├── Backend/
+│   ├── accounts/       # User management & ML services
+│   ├── ml/             # Machine learning models
+│   └── utils/          # Helper utilities
+└── public/             # Static assets
+```
+
+## ML Models
+
+Our recommendation engine uses:
+- **Random Forest Classifier** - Primary prediction model
+- **Feature Engineering** - Skills, certifications, education mapping
+- **One-Hot Encoding** - Categorical feature transformation
+
+## API Documentation
+
+Key endpoints:
+- `POST /api/auth/` - User authentication
+- `GET/POST /api/profile/` - User profile management
+- `GET /api/recommendations/` - Get job recommendations
+- `GET/POST /api/support-tickets/` - Support ticket management
+
+## Live Demo
+
+Visit the live application: [https://edu2-job-ai.vercel.app](https://edu2-job-ai.vercel.app)
+
+
