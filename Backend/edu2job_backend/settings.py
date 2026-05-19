@@ -95,6 +95,12 @@ DATABASES = {
     }
 }
 
+MIGRATION_MODULES = {
+    'admin': 'mongo_migrations.admin',
+    'auth': 'mongo_migrations.auth',
+    'contenttypes': 'mongo_migrations.contenttypes',
+}
+
 
 # Password validation
 
