@@ -30,4 +30,9 @@ dist-ssr
 
 Backend/.venv/
 
-Backend/.venv/
+# Python caching & compiled files
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
