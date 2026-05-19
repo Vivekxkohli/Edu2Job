@@ -6,6 +6,8 @@ import decimal
 
 
 class UserSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
+
     class Meta:
         model = User
         fields = (
@@ -21,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
     password = serializers.CharField(write_only=True, min_length=6)
 
     class Meta:
@@ -48,6 +51,8 @@ class LoginSerializer(serializers.Serializer):
 
 
 class EducationSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
+    
     # Main fields for frontend display - always return decrypted values
     degree = serializers.SerializerMethodField()
     specialization = serializers.SerializerMethodField()
@@ -408,17 +413,22 @@ class EducationSerializer(serializers.ModelSerializer):
 
 
 class CertificationSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
+
     class Meta:
         model = Certification
         fields = ["id", "cert_name", "issuing_organization", "issue_date"]
 
 
 class PredictionHistorySerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
+
     class Meta:
         model = PredictionHistory
         fields = ["id", "predicted_roles", "confidence_scores", "timestamp"]
         
 class PredictionFeedbackSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
     user_email = serializers.CharField(source="user.email", read_only=True)
 
     class Meta:
@@ -435,6 +445,8 @@ class PredictionFeedbackSerializer(serializers.ModelSerializer):
 
 
 class SupportTicketSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
+
     class Meta:
         model = SupportTicket
         fields = "__all__"
