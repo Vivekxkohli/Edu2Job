@@ -4,7 +4,6 @@ from datetime import timedelta
 import os
 from dotenv import load_dotenv
 from cryptography.fernet import Fernet  # Import Fernet here
-import dj_database_url  # Import dj_database_url
 
 # Load environment variables from .env file
 load_dotenv()
@@ -16,13 +15,13 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # If SECRET_KEY is not in .env, use a default (for development only)
 if not SECRET_KEY:
-    print("⚠️ WARNING: SECRET_KEY not found in .env file!")
+    print("WARNING: SECRET_KEY not found in .env file!")
     SECRET_KEY = "django-insecure-change-this-in-production"
 
 # Get FERNET_KEY from .env, generate one if not found
 FERNET_KEY = os.getenv("FERNET_KEY")
 if not FERNET_KEY:
-    print("⚠️ WARNING: FERNET_KEY not found in .env file! Generating a new one...")
+    print("WARNING: FERNET_KEY not found in .env file! Generating a new one...")
     FERNET_KEY = Fernet.generate_key().decode()
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
@@ -36,9 +35,9 @@ if allowed_hosts_env:
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
+    "edu2job_backend.apps.MongoAdminConfig",
+    "edu2job_backend.apps.MongoAuthConfig",
+    "edu2job_backend.apps.MongoContentTypesConfig",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     # 3rd party
     "rest_framework",
     "corsheaders",
+    "django_mongodb_backend",
 
     # local apps
     "accounts",
@@ -85,17 +85,15 @@ WSGI_APPLICATION = "edu2job_backend.wsgi.application"
 
 
 # Database
-# Use SQLite locally, but allow override via DATABASE_URL for Postgres on Render
+# Use MongoDB via MONGODB_URI environment variable
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/edu2job")
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django_mongodb_backend",
+        "HOST": MONGODB_URI,
+        "NAME": os.getenv("MONGODB_NAME", "edu2job"),
     }
 }
-
-database_url = os.getenv("DATABASE_URL")
-if database_url:
-    DATABASES["default"] = dj_database_url.parse(database_url, conn_max_age=600)
 
 
 # Password validation
@@ -127,7 +125,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Enable WhiteNoise's GZip compression of static assets.
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 # ---------- CUSTOM AUTH / API / CORS / JWT ----------
 
